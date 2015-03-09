@@ -85,7 +85,7 @@ select {
 }
 
 #progress:after {
-    border-right: 2px solid gray;
+    border-right: 2px solid white;
     width: 30%;
     height: 80%;
     position: absolute;
