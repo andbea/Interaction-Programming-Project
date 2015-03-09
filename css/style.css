@@ -12,21 +12,21 @@ tr {
 	border-radius: 5px;
 	padding: 5px;
 	margin-right: 5px;
-	height: 88vh;
+	height: 700px;
 }
 
 #added_activities {
 	border: 1px solid rgba(211,211,211,1);
 	border-radius: 5px;
-	padding: 5px;
-	height: 80vh;
+   	overflow: hidden;
+	height: 640px;
 }
 
 #day_activities {
 	border: 1px solid rgba(211,211,211,1);
 	border-radius: 5px;
-	padding: 5px;
-	height: 73vh;
+   	overflow: hidden;
+	height: 585px;
 }
 
 .btn_custom {
@@ -91,4 +91,31 @@ select {
     position: absolute;
     left: 0;
     content: '';
+}
+
+.activity {
+	height: 38px;
+	width: 100%;
+	padding: 0;
+	border-bottom: 1px solid rgba(211,211,211,1);
+}
+
+.activity p {
+	color: white;
+}
+
+#presentation.activity {
+	background-color: rgba(0, 153, 204, 1);
+}
+
+#break.activity {
+	background-color: rgba(255, 153, 0, 1);
+}
+
+#discussion.activity {
+	background-color: rgba(146, 205, 0, 1);
+}
+
+#groupWork.activity {
+	background-color: rgba(210, 54, 65, 1);
 }
