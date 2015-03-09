@@ -143,7 +143,7 @@ function Day(startH,startM) {
 }
 
 
-// this is our main module that contians days and praked activites
+// this is our main module that contains days and parked activites
 function Model(){
 	this.days = [];
 	this.parkedActivities = [];
@@ -224,10 +224,6 @@ function Model(){
 	};
 	//*** END OBSERVABLE PATTERN ***
 }
-
-// this is the instance of our main model
-// this is what you should use in your application
-var model = new Model();
 
 
 // you can use this method to create some test data and test your implementation
