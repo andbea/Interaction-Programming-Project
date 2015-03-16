@@ -66,14 +66,13 @@ function Activity(name,length,typeid,description){
 // This is a day consturctor. You can use it to create days, 
 // but there is also a specific function in the Model that adds
 // days to the model, so you don't need call this yourself.
-function Day(startH,startM) {
+function Day(startH, startM) {
 	this._start = startH * 60 + startM;
 	this._activities = [];
 
 	// sets the start time to new value
 	this.setStart = function(startH,startM) {
 		this._start = startH * 60 + startM;
-		model.notifyObservers();
 	}
 
 	// returns the total length of the acitivities in 
@@ -91,6 +90,22 @@ function Day(startH,startM) {
 	this.getEnd = function() {
 		var end = this._start + this.getTotalLength();
 		return Math.floor(end/60) + ":" + end % 60;
+	};
+
+	this.getActivityStart = function(id) {
+		var time = 0,
+			minutes = "";
+		for(var i = 0; i < id; i++) {
+			time += this._activities[i].getLength();
+		}
+		time = this._start + time;
+		if(time%60 == 0){
+			minutes = "00";
+		}
+		else {
+			minutes = time%60;
+		}
+		return Math.floor(time/60) + ":" + minutes;
 	};
 	
 	// returns the string representation Hours:Minutes of 
@@ -142,34 +157,35 @@ function Day(startH,startM) {
 	};
 
 	var newDayContainer = document.createElement("td");
-	newDayContainer.setAttribute("id", "dayContainer");
+	newDayContainer.setAttribute("id", "dayView");
 	newDayContainer.innerHTML = 
 		'<div class="post">\
 			<div class="row">\
 				<div class="col-md-4" style="padding-right: 0">\
-					<p>Start time:</p>\
+					<p style="padding-top: 4px">Start time:</p>\
 					<p>End time:</p>\
 					<p>Total length:</p>\
 				</div>\
-				<div class="col-md-3">\
-					<input type="text" value="08:00" style="width: 100%">\
-					<input type="text" value="08:00" style="width: 100%; background-color: white;" disabled>\
-					<input type="text" value="0 min" style="width: 100%; background-color: white;" disabled>\
+				<div class="col-md-3" align="right" style="padding-right: 3px; padding-left: 3px;">\
+					<input id="startTime" type="text" value="08:00" style="width: 70%; margin-bottom: 4px;">\
+					<p id="endTime" style="padding-top: 5px; padding-right: 2px; text-align: right;">8:00</p>\
+					<p id="totalLength" style="text-align: right; padding-right: 2px; width:100%;">0 min</p>\
 				</div>\
 				<div class="col-md-5" style="padding-left: 5px">\
 					<div id="progress" class="progress" style="height: 80px">\
-						<div class="progress-bar progress-bar-warning" style="width: 0%"></div>\
-						<div class="progress-bar progress-bar-danger" style="width: 0%"></div>\
-						<div class="progress-bar progress-bar-info" style="width: 0%"></div>\
-						<div class="progress-bar progress-bar-success" style="width: 0%"></div>\
+						<div id="groupWork_bar" class="progress-bar progress-bar-warning" style="width: 0%"></div>\
+						<div id="break_bar" class="progress-bar progress-bar-danger" style="width: 0%"></div>\
+						<div id="presentation_bar" class="progress-bar progress-bar-info" style="width: 0%"></div>\
+						<div id="discussion_bar" class="progress-bar progress-bar-success" style="width: 0%"></div>\
 					</div>\
 				</div>\
 			</div>\
-			<div id="day_activities"></div>\
+			<div id="activitiesContainer"></div>\
 		</div>';
 
 	var list = document.getElementById("container_table");
     list.insertBefore(newDayContainer, document.getElementById("addDayContainer"));
+
 }
 
 
@@ -177,8 +193,6 @@ function Day(startH,startM) {
 function Model(){
 	this.days = [];
 	this.parkedActivities = [];
-	
-	createTestData(); 
 	
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
@@ -205,6 +219,10 @@ function Model(){
 			else this.parkedActivities.push(activity);
 		}
 		this.notifyObservers();
+	}
+
+	this.getActivities = function (day) {
+		return this.days[day]._activities;
 	}
 	
 	// add an activity to parked activities
@@ -256,34 +274,61 @@ function Model(){
 	};
 	//*** END OBSERVABLE PATTERN ***
 
-	this.updateActivities = function (container, list) {
-		container.empty();
+	this.updateActivities = function (container, id, list_type) {
+		container.find("#activitiesContainer").empty();
+		var list; 
+		if(id == -1){
+			list = this.parkedActivities;
+		}
+		else {
+			list = this.getActivities(id);
+		}
 		for(var i = 0; i < list.length; i++) {
 			var activity = list[i];
 			var name = activity.getName();
 			var type = ActivityType[activity.getTypeId()];
-			var length = activity.getLength();
+			var time;
+			if(list_type == "parked") {
+				time = activity.getLength() + " min";
+			}
+			else {
+				time = this.days[id].getActivityStart(i);
+			}
 			var html = 
-				'<div class="activity" id="'+ type + '" draggable="true">\
-					<div class="row" style="padding: 8px">\
-						<div class="col-md-4" style="padding-left: 30px;">\
-							<p>' + length + ' min</p>\
+				'<div class="activity '+ type + '" id="' + i + '" draggable="true" >\
+					<div id="' + i + '" class="row" style="padding: 8px">\
+						<div id="' + i + '" class="col-md-4" style="padding-left: 30px;">\
+							<p id="' + i + '">' + time + '</p>\
 						</div>\
-						<div class="col-md-8" style="padding-left: 5px;">\
-							<p>' + name + ' </p>\
+						<div id="' + i + ' class="col-md-8" style="padding-left: 5px;">\
+							<p id="' + i + '">' + name + ' </p>\
 						</div>\
 					</div>\
 				</div>';
-			container.append(html);
+			container.find("#activitiesContainer").append(html);
 		}
 
+		if(list_type == "active") {
+			container.find("#endTime").html(this.days[id].getEnd());
+			container.find("#totalLength").html(this.days[id].getTotalLength() + " min");
+			for(var i = 0; i < ActivityType.length; i++) {
+				var procentage = this.days[id].getLengthByType(i)/this.days[id].getTotalLength();
+				container.find("#" + ActivityType[i] + "_bar").width(procentage*100 + "%");
+			}
+		}
 	}
 }
 
 
 // you can use this method to create some test data and test your implementation
-function createTestData(){
+function createTestData(model){
 	model.addDay();
+		
+	var container = $("#dayView").last();
+	var id = $("#dayView").length-1;
+	var dayView = new DayView(container, model, id);
+	var dayViewController = new DayViewController(dayView, model);
+
 	model.addActivity(new Activity("Introduction",10,0,""),0);
 	model.addActivity(new Activity("Idea 1",30,0,""),0);
 	model.addActivity(new Activity("Working in groups",35,1,""),0);

@@ -7,9 +7,6 @@ $(function() {
 	var activityView = new ActivityView($("#activityView"), model);
 	var activityViewController = new ActivityViewController(activityView, model);
 
-	var dayView = new DayView($("#dayView"), model);
-	var dayViewController = new DayViewController(dayView, model);
-
 	var modalView = new ModalView($("#modalView"), model);
 	var modalViewController = new ModalViewController(modalView, model);
 
@@ -18,5 +15,7 @@ $(function() {
 
 	var dragDropView = new DragDropView($("#dragDropView"), model);
 	var dragDropViewController = new DragDropViewController(dragDropView, model);
+	
+	createTestData(model); 
 });
 

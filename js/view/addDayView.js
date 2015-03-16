@@ -1,6 +1,6 @@
-var AddDayView = function (container, model) {
+var AddDayView = function (container, model, id) {
 	
-	this.addDay_button = container.find("#button_add_day");
+	this.addDay_button = container.find("#addDay");
 
 	model.addObserver(this);
 

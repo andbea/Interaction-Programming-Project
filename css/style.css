@@ -22,7 +22,7 @@ tr {
 	height: 640px;
 }
 
-#day_activities {
+#dayActivities {
 	border: 1px solid rgba(211,211,211,1);
 	border-radius: 5px;
    	overflow: hidden;
@@ -98,24 +98,41 @@ select {
 	width: 100%;
 	padding: 0;
 	border-bottom: 1px solid rgba(211,211,211,1);
+	cursor: pointer;
 }
 
 .activity p {
 	color: white;
 }
 
-#presentation.activity {
+.presentation {
 	background-color: rgba(0, 153, 204, 1);
 }
 
-#break.activity {
+.presentation:hover {
+	background-color: rgba(0, 153, 204, 0.8);
+}
+
+.break {
 	background-color: rgba(255, 153, 0, 1);
 }
 
-#discussion.activity {
+.break:hover {
+	background-color: rgba(255, 153, 0, 0.8);
+}
+
+.discussion {
 	background-color: rgba(146, 205, 0, 1);
 }
 
-#groupWork.activity {
+.discussion:hover {
+	background-color: rgba(146, 205, 0, 0.8);
+}
+
+.groupWork {
 	background-color: rgba(210, 54, 65, 1);
+}
+
+.groupWork:hover {
+	background-color: rgba(210, 54, 65, 0.8);
 }

@@ -1,13 +1,11 @@
 var ActivityView = function (container, model) {
 
 	this.activitiesContainer = container.find("#activitiesContainer");
-	this.activitiesContainer = container.find("#activitiesContainer");
-
-	model.updateActivities(this.activitiesContainer, model.parkedActivities);
-
+	this.addActivity = container.find("#addActivity");
+	
 	model.addObserver(this);
 
 	this.update = function(){
-		model.updateActivities(this.activitiesContainer, model.parkedActivities);
+		model.updateActivities(container, -1, "parked");
 	}
 }

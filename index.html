@@ -31,64 +31,16 @@
 			<tr id="container_table">
 				<td id="activityView">
 					<div class="post">
-						<button class="btn btn_custom" type="button" id="button_add_activity" data-toggle="modal" data-target=".addActivityModal">
+						<button class="btn btn_custom" type="button" id="addActivity">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true" style="margin-right: 5px"></span>Add Activity
 						</button>
-						<div id="activitiesContainer">
-							<div class="activity" id="groupWork" draggable="true">
-								<div class="row" style="padding: 8px">
-									<div class="col-md-4" style="padding-left: 30px;">
-										<p>30 min</p>
-									</div>
-									<div class="col-md-8" style="padding-left: 5px;">
-										<p>Group work</p>
-									</div>
-								</div>
-							</div>
-
-							<div class="activity" id="discussion" draggable="true">
-								<div class="row" style="padding: 8px">
-									<div class="col-md-4" style="padding-left: 30px;">
-										<p>60 min</p>
-									</div>
-									<div class="col-md-8" style="padding-left: 5px;">
-										<p>Idea 3 - Discussion</p>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</td>
-
-				<td id="dayContainer">
-					<div class="post">
-						<div class="row">
-							<div class="col-md-4" style="padding-right: 0">
-								<p>Start time:</p>
-								<p>End time:</p>
-								<p>Total length:</p>
-							</div>
-							<div class="col-md-3">
-								<input type="text" value="08:00" style="width: 100%">
-								<input type="text" value="08:00" style="width: 100%; background-color: white;" disabled>
-								<input type="text" value="0 min" style="width: 100%; background-color: white;" disabled>
-							</div>
-							<div class="col-md-5" style="padding-left: 5px">
-								<div id="progress" class="progress" style="height: 80px">
-									<div class="progress-bar progress-bar-warning" style="width: 50%"></div>
-									<div class="progress-bar progress-bar-danger" style="width: 10%"></div>
-									<div class="progress-bar progress-bar-info" style="width: 40%"></div>
-									<div class="progress-bar progress-bar-success" style="width: 0%"></div>
-								</div>
-							</div>
-						</div>
-						<div id="day_activities"></div>
+						<div id="activitiesContainer"></div>
 					</div>
 				</td>
 
 				<td id="addDayContainer">
 					<div id="addDayView" class="post" style="border-style: dashed">
-						<button class="btn btn_custom" id="button_add_day">
+						<button class="btn btn_custom" id="addDay">
 								<span class="glyphicon glyphicon-plus" aria-hidden="true" style="margin-right: 5px"></span>Add a Day
 						</button>
 					</div>
@@ -98,32 +50,62 @@
 		<div id="modalView" class="modal fade addActivityModal" tabindex="-1" role="dialog" aria-labelledby="addActivityModal" aria-hidden="true">
 		  	<div class="modal-dialog modal-sm">
 		    	<div class="modal-content">
-		    		<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-						<h4 class="modal-title" id="myModalLabel">Add Activity</h4>
-					</div>
-					<form data-toggle="validator" role="form">
-						<div class="modal-body">
-					    	<input id="activityName" type="text" class="form-control" placeholder="Name" required>
-					        <br>
-					        <input id="activityDuration" type="number" class="form-control" placeholder="Duration in min." required>
-					        <br>
-					        <select id="activityType" class="form-control">
-	    						<option value="-1" disabled="" selected="">Type</option>
-							    <option value="0">Presentation</option>
-							    <option value="1">Group Work</option>
-							    <option value="2">Discussion</option>
-							    <option value="3">Break</option>
-							</select>
-					        <br>
-		      				<textarea id="activityDescription" class="form-control" rows="5" placeholder="Description" style="resize: none;" required></textarea>
-	    					<div class="help-block with-errors"></div>
+		    		<div id="modalAddView" style="display: none;">
+			    		<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Add Activity</h4>
 						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-							<button id="createActivity" type="submit" class="btn btn-primary">Create</button>
+						<form data-toggle="validator" role="form">
+							<div class="modal-body">
+						    	<input id="activityName" type="text" class="form-control" placeholder="Name" style="text-align: left;" required>
+						        <br>
+						        <input id="activityDuration" type="number" class="form-control" placeholder="Duration in min." required>
+						        <br>
+						        <select id="activityType" class="form-control">
+		    						<option value="-1" disabled="" selected="">Type</option>
+								    <option value="0">Presentation</option>
+								    <option value="1">Group Work</option>
+								    <option value="2">Discussion</option>
+								    <option value="3">Break</option>
+								</select>
+						        <br>
+			      				<textarea id="activityDescription" class="form-control" rows="5" placeholder="Description" style="resize: none;" required></textarea>
+		    					<div class="help-block with-errors"></div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button id="createActivity" type="submit" class="btn btn-primary">Create</button>
+							</div>
+			      		</form>
+			      	</div>
+		    		<div id="modalEditView" style="display: none;">
+			    		<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Edit Activity</h4>
 						</div>
-		      		</form>
+						<form data-toggle="validator" role="form">
+							<div class="modal-body">
+						    	<input id="activityName" type="text" class="form-control" placeholder="Name" style="text-align: left;" required>
+						        <br>
+						        <input id="activityDuration" type="number" class="form-control" placeholder="Duration in min." required>
+						        <br>
+						        <select id="activityType" class="form-control">
+		    						<option value="-1" disabled="" selected="">Type</option>
+								    <option value="0">Presentation</option>
+								    <option value="1">Group Work</option>
+								    <option value="2">Discussion</option>
+								    <option value="3">Break</option>
+								</select>
+						        <br>
+			      				<textarea id="activityDescription" class="form-control" rows="5" placeholder="Description" style="resize: none;" required></textarea>
+		    					<div class="help-block with-errors"></div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button id="addActivity" type="submit" class="btn btn-primary">Edit</button>
+							</div>
+			      		</form>
+			      	</div>
 		    	</div>
 		  	</div>
 		</div>
