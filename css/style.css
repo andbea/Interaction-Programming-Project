@@ -6,7 +6,7 @@ tr {
 	vertical-align: top;
 }
 
-.post { 
+.post{ 
 	width: 300px; 
 	border: 1px solid rgba(211,211,211,1);
 	border-radius: 5px;
@@ -15,7 +15,7 @@ tr {
 	height: 700px;
 }
 
-#added_activities {
+#activitiesContainer {
 	border: 1px solid rgba(211,211,211,1);
 	border-radius: 5px;
    	overflow: hidden;

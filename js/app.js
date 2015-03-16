@@ -10,6 +10,12 @@ $(function() {
 	var dayView = new DayView($("#dayView"), model);
 	var dayViewController = new DayViewController(dayView, model);
 
+	var modalView = new ModalView($("#modalView"), model);
+	var modalViewController = new ModalViewController(modalView, model);
+
+	var addDayView = new AddDayView($("#addDayView"), model);
+	var addDayViewController = new AddDayViewController(addDayView, model);
+
 	var dragDropView = new DragDropView($("#dragDropView"), model);
 	var dragDropViewController = new DragDropViewController(dragDropView, model);
 });

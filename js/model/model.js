@@ -1,7 +1,7 @@
 // JavaScript Document
 
 // The possible activity types
-var ActivityType = ["Presentation","Group Work","Discussion","Break"]
+var ActivityType = ["presentation","groupWork","discussion","break"]
 
 // This is an activity constructor
 // When you want to create a new activity you just call
@@ -140,6 +140,36 @@ function Day(startH,startM) {
 		var activity = this._removeActivity(oldposition);
 		this._addActivity(activity, newposition);
 	};
+
+	var newDayContainer = document.createElement("td");
+	newDayContainer.setAttribute("id", "dayContainer");
+	newDayContainer.innerHTML = 
+		'<div class="post">\
+			<div class="row">\
+				<div class="col-md-4" style="padding-right: 0">\
+					<p>Start time:</p>\
+					<p>End time:</p>\
+					<p>Total length:</p>\
+				</div>\
+				<div class="col-md-3">\
+					<input type="text" value="08:00" style="width: 100%">\
+					<input type="text" value="08:00" style="width: 100%; background-color: white;" disabled>\
+					<input type="text" value="0 min" style="width: 100%; background-color: white;" disabled>\
+				</div>\
+				<div class="col-md-5" style="padding-left: 5px">\
+					<div id="progress" class="progress" style="height: 80px">\
+						<div class="progress-bar progress-bar-warning" style="width: 0%"></div>\
+						<div class="progress-bar progress-bar-danger" style="width: 0%"></div>\
+						<div class="progress-bar progress-bar-info" style="width: 0%"></div>\
+						<div class="progress-bar progress-bar-success" style="width: 0%"></div>\
+					</div>\
+				</div>\
+			</div>\
+			<div id="day_activities"></div>\
+		</div>';
+
+	var list = document.getElementById("container_table");
+    list.insertBefore(newDayContainer, document.getElementById("addDayContainer"));
 }
 
 
@@ -147,6 +177,8 @@ function Day(startH,startM) {
 function Model(){
 	this.days = [];
 	this.parkedActivities = [];
+	
+	createTestData(); 
 	
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
@@ -223,6 +255,29 @@ function Model(){
 	    listeners.push(listener);
 	};
 	//*** END OBSERVABLE PATTERN ***
+
+	this.updateActivities = function (container, list) {
+		container.empty();
+		for(var i = 0; i < list.length; i++) {
+			var activity = list[i];
+			var name = activity.getName();
+			var type = ActivityType[activity.getTypeId()];
+			var length = activity.getLength();
+			var html = 
+				'<div class="activity" id="'+ type + '" draggable="true">\
+					<div class="row" style="padding: 8px">\
+						<div class="col-md-4" style="padding-left: 30px;">\
+							<p>' + length + ' min</p>\
+						</div>\
+						<div class="col-md-8" style="padding-left: 5px;">\
+							<p>' + name + ' </p>\
+						</div>\
+					</div>\
+				</div>';
+			container.append(html);
+		}
+
+	}
 }
 
 
