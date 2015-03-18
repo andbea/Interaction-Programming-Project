@@ -4,7 +4,7 @@ var DayViewController = function(view, model) {
 	and if so, it notifies the observers so that the activities list can be updated*/
 	view.startTime.change(function(){
 		var time = view.startTime.val().split(':');
-		model.days[view.id].setStart(parseInt(time[0]), parseInt(time[1]));
+		model.days[view.day].setStart(parseInt(time[0]), parseInt(time[1]));
 		model.notifyObservers();
 	});
 
