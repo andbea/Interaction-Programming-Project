@@ -1,6 +1,6 @@
 var DragDropView = function (container, model) {
-	
-	//this.numberOfGuests = container.find("#numberOfGuests");
+
+	/* Here the drag and drop view will be added if one is required.*/
 
 	model.addObserver(this);
 

@@ -92,6 +92,8 @@ function Day(startH, startM) {
 		return Math.floor(end/60) + ":" + end % 60;
 	};
 
+	// This function returns the starting time of the activity
+	// by adding all the times of the earlier activities together
 	this.getActivityStart = function(id) {
 		var time = 0,
 			minutes = "";
@@ -156,6 +158,8 @@ function Day(startH, startM) {
 		this._addActivity(activity, newposition);
 	};
 
+	// This part creates the day window by creating all the necessary elements
+	// and then appending it infront of the addDay window
 	var newDayContainer = document.createElement("td");
 	newDayContainer.setAttribute("id", "dayView");
 
@@ -290,6 +294,7 @@ function Model(){
 		this.notifyObservers();
 	}
 
+	// This function gets the activity list for that specific day.
 	this.getActivities = function (day) {
 		return this.days[day]._activities;
 	}
@@ -343,7 +348,17 @@ function Model(){
 	};
 	//*** END OBSERVABLE PATTERN ***
 
-	this.updateActivities = function (container, id, list_type) {
+	/* This function updates the list of activities. The inputs are:
+		container - The window in which the activity table can be found,
+		this is either the day or the activity holder.
+
+		id - This is the id of the day or -1 if it is the activity container.
+		The activity holder also presents the time in minutes, whilst the days
+		have the starting time of the activity presented.
+
+	The function removes the entire container of activites and then replaces them with
+	new elements. This function is called from the update windows of the days and activity holder*/
+	this.updateActivities = function (container, id) {
 		container.find("#activitiesContainer").empty();
 		var list; 
 		if(id == -1){
@@ -357,7 +372,7 @@ function Model(){
 			var name = activity.getName();
 			var type = ActivityType[activity.getTypeId()];
 			var time;
-			if(list_type == "parked") {
+			if(id == -1) {
 				time = activity.getLength() + " min";
 			}
 			else {
@@ -406,7 +421,7 @@ function Model(){
 			container.find("#activitiesContainer").append(element);
 		}
 
-		if(list_type == "active") {
+		if(id != -1) {
 			container.find("#endTime").html(this.days[id].getEnd());
 			container.find("#totalLength").html(this.days[id].getTotalLength() + " min");
 			for(var i = 0; i < ActivityType.length; i++) {
