@@ -4,8 +4,12 @@ var DayViewController = function(view, model) {
 	and if so, it notifies the observers so that the activities list can be updated*/
 	view.startTime.change(function(){
 		var time = view.startTime.val().split(':');
-		model.days[view.day].setStart(parseInt(time[0]), parseInt(time[1]));
-		model.notifyObservers();
+		if(parseInt(time[0]) <= 24 && parseInt(time[1]) <= 60){
+			model.days[view.day].setStart(parseInt(time[0]), parseInt(time[1]));
+			model.notifyObservers();
+		}
+		else
+			alert("The time you entered is invalid");
 	});
 
 	//makes it posible to drop events
