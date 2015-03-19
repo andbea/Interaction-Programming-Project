@@ -38,7 +38,7 @@ var DayViewController = function(view, model) {
 		ev.preventDefault();
 		view.activitiesContainer.css({"border": "2px solid rgba(101,153,255,0.6)"});
 		model.currentDragOver["day"] = view.day;
-		model.currentDragOver["id"] = -2;
+		model.currentDragOver["id"] = model.days[view.day]._activities.length - 1;
 	});
 
 	view.activitiesContainer.on("dragleave", function (ev){
