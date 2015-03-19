@@ -4,7 +4,7 @@ var DragDropViewController = function(view, model) {
 	The action would have to be initiated from either the activity holder window or the individual day
 	windows.*/
 
-	//makes it possible to drag events in container
+	//makes it posible to drg events in container
 	view.holder.on("drag", function (ev) {
 		ev.preventDefault();
     	ev.stopPropagation();
@@ -22,10 +22,7 @@ var DragDropViewController = function(view, model) {
 		view.holder.css({"display":"none"});
 	});
 
-	/* makes it possible to drop events in container. Checks if the event is 
-	dropt in a day or in the activityContainer */
 	view.holder.on("dragend", function (ev) {
-
 		ev.preventDefault();
     	ev.stopPropagation();
 		if(view.day == -1) {
@@ -46,17 +43,4 @@ var DragDropViewController = function(view, model) {
 
 		model.notifyObservers();
 	});
-
-	view.holder.on("dragover", function (ev) {
-
-		ev.preventDefault();
-    	ev.stopPropagation();
-
-    	model.currentDragOver[]
-
-
-		model.notifyObservers();
-	});
-
-
 }

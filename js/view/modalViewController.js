@@ -37,7 +37,7 @@ var ModalViewController = function(view, model) {
 
  		var id = e.target.id;
 
- 		console.log("Current " + view.currentDay + "; changedto " + day); 
+ 		console.log("Current " + id);
 
  		$("#modalView").modal('hide');
 
