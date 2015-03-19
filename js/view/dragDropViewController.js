@@ -43,4 +43,33 @@ var DragDropViewController = function(view, model) {
 
 		model.notifyObservers();
 	});
+
+	/* This function checks to see whether a activity has been clicked.
+	If so it presents the modal (popup window) in editing view and populates it with
+	the activities details for editing.*/ 
+	view.holder.click(function(e) {
+ 		$("#modalAddView").css("display", "none");
+ 		$("#modalEditView").css("display", "inherit");
+
+ 		var id = e.target.id;
+ 		var list, day;
+ 		if(view.day != -1) {
+ 			list = model.getActivities(view.day);
+ 			day = view.day;
+ 		}
+ 		else {
+ 			list = model.parkedActivities;
+ 			day = -1;
+ 		}
+		var activity = list[id];
+
+		model.editActivity["day"] = day;
+		model.editActivity["id"] = id;
+		$("#modalEditView").find("#activityName").val(activity.getName());
+ 		$("#modalEditView").find("#activityDuration").val(activity.getLength());
+ 		$("#modalEditView").find('#activityType').val(activity.getTypeId());
+ 		$("#modalEditView").find("#activityDescription").val(activity.getDescription());
+
+ 		$("#modalView").modal('show');
+	});
 }

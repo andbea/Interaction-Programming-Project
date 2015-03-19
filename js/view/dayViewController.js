@@ -8,26 +8,6 @@ var DayViewController = function(view, model) {
 		model.notifyObservers();
 	});
 
-	/* This function checks to see whether a activity has been clicked.
-	If so it presents the modal (popup window) in editing view and populates it with
-	the activities details for editing.*/ 
-	view.activitiesContainer.click(function(e) {
- 		$("#modalAddView").css("display", "none");
- 		$("#modalEditView").css("display", "inherit");
-
- 		var id = e.target.id;
- 		var list = model.getActivities(view.day);
-		var activity = list[id];
-
-		$("#modalEditView").find("#activityDay").val(view.day);
-		$("#modalEditView").find("#activityName").val(activity.getName());
- 		$("#modalEditView").find("#activityDuration").val(activity.getLength());
- 		$("#modalEditView").find('#activityType').val(activity.getTypeId());
- 		$("#modalEditView").find("#activityDescription").val(activity.getDescription());
-
- 		$("#modalView").modal('show');
-	});
-
 	//makes it posible to drop events
 	view.activitiesContainer.on("drop", function (ev){
 		ev.preventDefault();

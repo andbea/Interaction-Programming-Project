@@ -4,7 +4,7 @@ var ModalView = function (container, model) {
 	this.createActivity_button = container.find("#createActivity");
 	this.editActivity_button = container.find("#editActivity");
 	this.editActivity_day = container.find("#activityDay");
-	this.currentDay = 0;
+	this.editActivity_id = container.find("#activityId");
 
 	model.addObserver(this);
 
