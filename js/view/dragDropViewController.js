@@ -28,6 +28,8 @@ var DragDropViewController = function(view, model) {
 	});
 
 	view.holder.on("drop", function (ev) {
-		
+		ev.preventDefault();
+		model.addActivity(model.dragActivity["activity"], model.currentDragOver["day"], model.currenDragOver["id"]);
+
 	});
 }
