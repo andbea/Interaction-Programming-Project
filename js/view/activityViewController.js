@@ -11,7 +11,7 @@ var ActivityViewController = function(view, model) {
 		ev.preventDefault();
 		view.activitiesContainer.css({"border": "2px solid rgba(101,153,255,0.6)"});
 		model.currentDragOver["dag"] = -1;
-		model.currentDragOver["id"] = 0;
+		model.currentDragOver["id"] = -2;
 
 	});
 
