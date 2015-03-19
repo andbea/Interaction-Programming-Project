@@ -262,11 +262,15 @@ function Day(startH, startM) {
 }
 
 
+
+
+
 // this is our main module that contains days and parked activites
 function Model(){
 	this.days = [];
 	this.parkedActivities = [];
-	
+	this.dragActivity = {"listId":0, "position":0, "activity":null};
+
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
 	this.addDay = function (startH,startM) {
@@ -283,15 +287,21 @@ function Model(){
 	
 	// add an activity to model
 	this.addActivity = function (activity,day,position) {
+		var id;
 		if(day != null) {
 			this.days[day]._addActivity(activity,position);
 		} else {
 			if (position != null) {
+				id = position;
 				this.parkedActivities.splice(position,0,activity);
 			}
-			else this.parkedActivities.push(activity);
+			else {
+				this.parkedActivities.push(activity);
+				id = this.parkedActivities.length-1;
+			}
 		}
 		this.notifyObservers();
+		return id;
 	}
 
 	// This function gets the activity list for that specific day.
@@ -430,28 +440,4 @@ function Model(){
 			}
 		}
 	}
-}
-
-
-// you can use this method to create some test data and test your implementation
-function createTestData(model){
-	model.addDay();
-		
-	var container = $("#dayView").last();
-	var id = $("#dayView").length-1;
-	var dayView = new DayView(container, model, id);
-	var dayViewController = new DayViewController(dayView, model);
-
-	model.addActivity(new Activity("Introduction",10,0,""),0);
-	model.addActivity(new Activity("Idea 1",30,0,""),0);
-	model.addActivity(new Activity("Working in groups",35,1,""),0);
-	model.addActivity(new Activity("Idea 1 discussion",15,2,""),0);
-	model.addActivity(new Activity("Coffee break",20,3,""),0);
-	
-	console.log("Day Start: " + model.days[0].getStart());
-	console.log("Day End: " + model.days[0].getEnd());
-	console.log("Day Length: " + model.days[0].getTotalLength() + " min");
-	$.each(ActivityType,function(index,type){
-		console.log("Day '" + ActivityType[index] + "' Length: " +  model.days[0].getLengthByType(index) + " min");
-	});
 }

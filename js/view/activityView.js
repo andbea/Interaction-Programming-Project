@@ -10,4 +10,5 @@ var ActivityView = function (container, model) {
 	this.update = function(){
 		model.updateActivities(container, -1);
 	}
+
 }

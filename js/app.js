@@ -12,9 +12,6 @@ $(function() {
 
 	var addDayView = new AddDayView($("#addDayView"), model);
 	var addDayViewController = new AddDayViewController(addDayView, model);
-
-	var dragDropView = new DragDropView($("#dragDropView"), model);
-	var dragDropViewController = new DragDropViewController(dragDropView, model);
 	
 	createTestData(model); 
 });

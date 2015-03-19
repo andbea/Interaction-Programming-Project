@@ -5,7 +5,7 @@ var DayView = function (container, model, id) {
 	the day viewer sends its container and id to the updateActivies function*/
 	this.day = id;
 	this.startTime = container.find("#startTime");
-	this.activity = container.find("#activitiesContainer");
+	this.activitiesContainer = container.find("#activitiesContainer");
 
 	model.addObserver(this);
 

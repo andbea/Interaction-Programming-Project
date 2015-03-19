@@ -6,4 +6,5 @@ var ActivityViewController = function(view, model) {
  		$("#modalEditView").css("display", "none");
  		$("#modalView").modal('show');
 	});
+
 }

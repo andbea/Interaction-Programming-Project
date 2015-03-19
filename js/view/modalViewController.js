@@ -20,7 +20,10 @@ var ModalViewController = function(view, model) {
  		$("#modalAddView").find("#activityDescription").val("");
 
  		var activity = new Activity(name, length, typeId, description);
- 		model.addActivity(activity, null, null);
+ 		var id = model.addActivity(activity, null, null);
+
+ 		var dragDropView = new DragDropView($("#activityView").find("#" + id), model, "-1");
+		var dragDropViewController = new DragDropViewController(dragDropView, model);
  	});
 
  	/* ----Unfinished---
