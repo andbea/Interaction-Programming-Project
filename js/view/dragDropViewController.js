@@ -29,5 +29,5 @@ var DragDropViewController = function(view, model) {
 
 	view.holder.on("drop", function (ev) {
 		
-	}
+	});
 }
