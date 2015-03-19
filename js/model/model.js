@@ -161,7 +161,6 @@ function Day(startH, startM) {
 	// This part creates the day window by creating all the necessary elements
 	// and then appending it infront of the addDay window
 	var newDayContainer = document.createElement("td");
-	newDayContainer.setAttribute("id", "dayView");
 	newDayContainer.setAttribute("class", "dayView");
 
 	var element = document.createElement("div");
@@ -271,6 +270,7 @@ function Model(){
 	this.days = [];
 	this.parkedActivities = [];
 	this.dragActivity = {"listId":0, "position":0, "activity":null};
+	this.currentHover = {"dag":0, "id":-1};
 
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00

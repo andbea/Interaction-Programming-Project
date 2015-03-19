@@ -29,16 +29,25 @@ var ModalViewController = function(view, model) {
  	from the day list and then edit its information or remove and recreate an activity in its place.*/
  	view.editActivity_button.click(function(e) {
  		e.preventDefault();
- 		var name = $("#modalAddView").find("#activityName").val();
- 		var length = $("#modalAddView").find("#activityDuration").val();
- 		var typeId = $("#modalAddView").find('#activityType').val();
- 		var description = $("#modalAddView").find("#activityDescription").val();
+ 		var day = $("#modalEditView").find("#activityDay").val();
+ 		var name = $("#modalEditView").find("#activityName").val();
+ 		var length = $("#modalEditView").find("#activityDuration").val();
+ 		var typeId = $("#modalEditView").find('#activityType').val();
+ 		var description = $("#modalEditView").find("#activityDescription").val();
+
+ 		var id = e.target.id;
+
+ 		console.log("Current " + view.currentDay + "; changedto " + day); 
 
  		$("#modalView").modal('hide');
 
- 		$("#modalAddView").find("#activityName").val("");
- 		$("#modalAddView").find("#activityDuration").val("");
- 		$("#modalAddView").find('#activityType').val(-1);
- 		$("#modalAddView").find("#activityDescription").val("");
+ 		$("#modalEditView").find("#activityName").val("");
+ 		$("#modalEditView").find("#activityDuration").val("");
+ 		$("#modalEditView").find('#activityType').val(-1);
+ 		$("#modalEditView").find("#activityDescription").val("");
+ 	});
+
+ 	view.editActivity_day.change(function() {
+ 		view.currentDay = $("#modalEditView").find("#activityDay").val();
  	});
 }
