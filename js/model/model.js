@@ -262,9 +262,6 @@ function Day(startH, startM) {
 }
 
 
-
-
-
 // this is our main module that contains days and parked activites
 function Model(){
 	this.days = [];
