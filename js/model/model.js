@@ -162,6 +162,7 @@ function Day(startH, startM) {
 	// and then appending it infront of the addDay window
 	var newDayContainer = document.createElement("td");
 	newDayContainer.setAttribute("id", "dayView");
+	newDayContainer.setAttribute("class", "dayView");
 
 	var element = document.createElement("div");
 	element.setAttribute("class", "post");
@@ -282,7 +283,11 @@ function Model(){
 		}
 		this.days.push(day);
 		this.notifyObservers();
-		return day;
+
+		var container = $(".dayView").last();
+		var id = $(".dayView").length - 1;
+		var dayView = new DayView(container, this, id);
+		var dayViewController = new DayViewController(dayView, this);
 	};
 	
 	// add an activity to model
