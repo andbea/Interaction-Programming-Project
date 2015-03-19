@@ -13,6 +13,5 @@ $(function() {
 	var addDayView = new AddDayView($("#addDayView"), model);
 	var addDayViewController = new AddDayViewController(addDayView, model);
 	
-	createTestData(model); 
 });
 

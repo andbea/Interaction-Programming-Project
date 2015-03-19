@@ -7,6 +7,7 @@ var DragDropViewController = function(view, model) {
 
 	//makes it posible to drg events in container
 	view.container.on("drag", function (ev){
+		console.log("dragging");
 		ev.preventDefault();
 		var id = ev.target.id;
 		var list;
@@ -26,6 +27,7 @@ var DragDropViewController = function(view, model) {
 		}
 		else 
 			model.days[view.day].removeActivity(id);
+
 		model.notifyObservers();
 	});
 

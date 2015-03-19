@@ -24,21 +24,24 @@ var DayViewController = function(view, model) {
  		$("#modalEditView").find('#activityType').val(activity.getTypeId());
  		$("#modalEditView").find("#activityDescription").val(activity.getDescription());
 
+//ska denna vara model.('show')??!??!
  		$("#modalView").modal('show');
 	});
 
 	//makes it posible to drop events
 	view.activitiesContainer.on("drop", function (ev){
 		ev.preventDefault();
-
 	});
-
-
-	
 
 	view.activitiesContainer.on("dragover", function (ev){
 		ev.preventDefault();
-
+		view.activitiesContainer.css({"border": "2px solid rgba(101,153,255,0.6)"});
 	});
+
+	view.activitiesContainer.on("dragleave", function (ev){
+		ev.preventDefault();
+		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
+	});
+
 
 }
