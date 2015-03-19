@@ -12,15 +12,29 @@ var ModalViewController = function(view, model) {
  		var typeId = $("#modalAddView").find('#activityType').val();
  		var description = $("#modalAddView").find("#activityDescription").val();
 
- 		$("#modalView").modal('hide');
+ 		if (name == "") {
+ 		 		alert("You must enter a activity name");	
+ 		}
+ 		else if (length == 0) {
+ 			alert("You must enter a number for the length of the activity");
+ 		}
+		else if (typeId == null) {
+ 			alert("You must enter a activity type");
+ 		}
+ 		else {
+	 		$("#modalView").modal('hide');
 
- 		$("#modalAddView").find("#activityName").val("");
- 		$("#modalAddView").find("#activityDuration").val("");
- 		$("#modalAddView").find('#activityType').val(-1);
- 		$("#modalAddView").find("#activityDescription").val("");
+	 		$("#modalAddView").find("#activityName").val("");
+	 		$("#modalAddView").find("#activityDuration").val("");
+	 		$("#modalAddView").find('#activityType').val(-1);
+	 		$("#modalAddView").find("#activityDescription").val("");
+	 		
+	 		console.log("name: " + name);
 
- 		var activity = new Activity(name, length, typeId, description);
- 		var id = model.addActivity(activity, null, null);
+
+	 		var activity = new Activity(name, length, typeId, description);
+	 		var id = model.addActivity(activity, null, null);
+	 	}
  	});
 
  	/* ----Unfinished---
