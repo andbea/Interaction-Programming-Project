@@ -19,13 +19,12 @@ var DragDropViewController = function(view, model) {
 		model.dragActivity["listId"] = view.day;
 		model.dragActivity["position"] = view.position;
 		model.dragActivity["activity"] = activity;
-
+		view.holder.css({"display":"none"});
 	});
 
 	view.holder.on("dragend", function (ev) {
 		ev.preventDefault();
     	ev.stopPropagation();
-		console.log("added");
 		if(view.day == -1) {
 			model.removeParkedActivity(view.position);
 		}
@@ -37,7 +36,6 @@ var DragDropViewController = function(view, model) {
 		else
 			day = model.currentDragOver["day"];
 		model.addActivity(model.dragActivity["activity"], day, model.currentDragOver["id"]);
-		console.log("added");
 
 		model.notifyObservers();
 	});

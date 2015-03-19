@@ -89,7 +89,13 @@ function Day(startH, startM) {
 	// the end time of the day
 	this.getEnd = function() {
 		var end = this._start + this.getTotalLength();
-		return Math.floor(end/60) + ":" + end % 60;
+		if(end%60 == 0){
+			minutes = "00";
+		}
+		else {
+			minutes = end%60;
+		}
+		return Math.floor(end/60) + ":" + minutes;
 	};
 
 	// This function returns the starting time of the activity
@@ -103,6 +109,9 @@ function Day(startH, startM) {
 		time = this._start + time;
 		if(time%60 == 0){
 			minutes = "00";
+		}
+		else if(time%60 < 10) {
+			minutes = "0" + time%60;
 		}
 		else {
 			minutes = time%60;

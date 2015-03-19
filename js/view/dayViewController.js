@@ -35,17 +35,12 @@ var DayViewController = function(view, model) {
 		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
 	});
 
-	view.activitiesContainer.on("dragenter", function (ev){
+	view.activitiesContainer.on("dragover", function (ev){
 		ev.preventDefault();
     	ev.stopPropagation();
 		view.activitiesContainer.css({"border": "2px solid rgba(101,153,255,0.6)"});
 		model.currentDragOver["day"] = view.day;
-		var position;
-		if(model.days[view.day]._activities.length == 0)
-			position = 0;
-		else
-			position = model.days[view.day]._activities.length - 1;
-		model.currentDragOver["id"] = position;
+		model.currentDragOver["id"] = null;
 	});
 
 	view.activitiesContainer.on("dragleave", function (ev){

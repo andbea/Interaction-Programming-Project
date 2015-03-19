@@ -12,12 +12,7 @@ var ActivityViewController = function(view, model) {
     	ev.stopPropagation();
 		view.activitiesContainer.css({"border": "2px solid rgba(101,153,255,0.6)"});
 		model.currentDragOver["day"] = -1;
-		var position;
-		if(model.parkedActivities.length == 0)
-			position = 0;
-		else
-			position = model.parkedActivities.length - 1;
-		model.currentDragOver["id"] = position;
+		model.currentDragOver["id"] = null;
 
 	});
 
