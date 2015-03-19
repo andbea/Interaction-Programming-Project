@@ -222,13 +222,13 @@ function Day(startH, startM) {
 				progress.setAttribute("style", "height: 80px");
 
 					var div = document.createElement("div");
-					div.setAttribute("id", "groupWork_bar");
+					div.setAttribute("id", "break_bar");
 					div.setAttribute("class", "progress-bar progress-bar-warning");
 					div.setAttribute("style", "width: 0%");
 					progress.appendChild(div);
 
 					div = document.createElement("div");
-					div.setAttribute("id", "break_bar");
+					div.setAttribute("id", "groupWork_bar");
 					div.setAttribute("class", "progress-bar progress-bar-danger");
 					div.setAttribute("style", "width: 0%");
 					progress.appendChild(div);
@@ -439,8 +439,13 @@ function Model(){
 			container.find("#endTime").html(this.days[id].getEnd());
 			container.find("#totalLength").html(this.days[id].getTotalLength() + " min");
 			for(var i = 0; i < ActivityType.length; i++) {
-				var procentage = this.days[id].getLengthByType(i)/this.days[id].getTotalLength();
-				container.find("#" + ActivityType[i] + "_bar").width(procentage*100 + "%");
+				if(this.days[id].getTotalLength() != 0){
+					var procentage = this.days[id].getLengthByType(i) / this.days[id].getTotalLength();
+					container.find("#" + ActivityType[i] + "_bar").width(procentage*100 + "%");
+				}
+				else {
+					container.find("#" + ActivityType[i] + "_bar").width(0 + "%");
+				}
 			}
 		}
 	}

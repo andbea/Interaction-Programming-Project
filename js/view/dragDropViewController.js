@@ -19,7 +19,6 @@ var DragDropViewController = function(view, model) {
 		model.dragActivity["position"] = id;
 		model.dragActivity["activity"] = activity;
 
-		console.log("Sent in = " + id);
 		if(view.day == -1) {
 			model.removeParkedActivity(id);
 		}
