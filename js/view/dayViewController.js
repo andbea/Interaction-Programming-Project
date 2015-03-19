@@ -50,6 +50,7 @@ var DayViewController = function(view, model) {
 		model.currentDragOver["id"] = id;
 	});
 
+/*  */
 	view.activitiesContainer.on("dragleave", function (ev){
 		ev.preventDefault();
     	ev.stopPropagation();
