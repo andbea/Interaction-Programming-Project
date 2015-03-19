@@ -267,7 +267,7 @@ function Model(){
 	this.days = [];
 	this.parkedActivities = [];
 	this.dragActivity = {"listId":0, "position":0, "activity":null};
-	this.currentDragOver = {"dag":0, "id":-1};
+	this.currentDragOver = {"day": 0, "id": -1};
 
 	// adds a new day. if startH and startM (start hours and minutes)
 	// are not provided it will set the default start of the day to 08:00
