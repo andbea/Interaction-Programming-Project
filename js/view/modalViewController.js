@@ -15,13 +15,14 @@ var ModalViewController = function(view, model) {
  		if (name == "") {
  		 		alert("You must enter a activity name");	
  		}
- 		else if (length == 0) {
+ 		else if (length == null || length == "") {
  			alert("You must enter a number for the length of the activity");
  		}
 		else if (typeId == null) {
  			alert("You must enter a activity type");
  		}
  		else {
+ 			length = parseInt(length);
 	 		$("#modalView").modal('hide');
 
 	 		$("#modalAddView").find("#activityName").val("");
@@ -44,31 +45,40 @@ var ModalViewController = function(view, model) {
  	view.editActivity_button.click(function(e) {
  		e.preventDefault();
  		var name = $("#modalEditView").find("#activityName").val();
- 		var length = parseInt($("#modalEditView").find("#activityDuration").val());
+ 		var length = $("#modalEditView").find("#activityDuration").val();
  		var typeId = $("#modalEditView").find('#activityType').val();
  		var description = $("#modalEditView").find("#activityDescription").val();
 
- 		if(model.editActivity["day"] == -1) {
- 			activity = model.parkedActivities[view.editActivity["id"]];
+ 		if (name == "") {
+ 		 		alert("You must enter a activity name");	
+ 		}
+ 		else if (length == null || length == "") {
+ 			alert("You must enter a number for the length of the activity");
  		}
  		else {
- 			var list = model.getActivities(model.editActivity["day"]);
- 			var id = model.editActivity["id"];
- 			activity = list[id];
+ 			length = parseInt(length);
+	 		if(model.editActivity["day"] == -1) {
+	 			activity = model.parkedActivities[view.editActivity["id"]];
+	 		}
+	 		else {
+	 			var list = model.getActivities(model.editActivity["day"]);
+	 			var id = model.editActivity["id"];
+	 			activity = list[id];
+	 		}
+
+	 		activity.setName(name);
+	 		activity.setLength(length);
+	 		activity.setTypeId(typeId);
+	 		activity.setDescription(description);
+
+			model.notifyObservers();
+
+	 		$("#modalView").modal('hide');
+
+	 		$("#modalEditView").find("#activityName").val("");
+	 		$("#modalEditView").find("#activityDuration").val("");
+	 		$("#modalEditView").find('#activityType').val(-1);
+	 		$("#modalEditView").find("#activityDescription").val("");
  		}
-
- 		activity.setName(name);
- 		activity.setLength(length);
- 		activity.setTypeId(typeId);
- 		activity.setDescription(description);
-
-		model.notifyObservers();
-
- 		$("#modalView").modal('hide');
-
- 		$("#modalEditView").find("#activityName").val("");
- 		$("#modalEditView").find("#activityDuration").val("");
- 		$("#modalEditView").find('#activityType').val(-1);
- 		$("#modalEditView").find("#activityDescription").val("");
  	});
 }
