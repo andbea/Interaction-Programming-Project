@@ -22,6 +22,11 @@ var DragDropViewController = function(view, model) {
 		view.holder.css({"display":"none"});
 	});
 
+/* When letting go of an event when dragging it.
+The function removs the event from teh previos list and adds it in teh new list.
+If the event is draged and droped within teh same container/day it checks if the element it hovers over has a lower 
+or a higher id. If higher the event has to move down in the list and therefore the index has to decrease with one, 
+due to that itself is removed before inserted again.  */
 	view.holder.on("dragend", function (ev) {
 		ev.preventDefault();
     	ev.stopPropagation();
