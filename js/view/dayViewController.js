@@ -31,11 +31,13 @@ var DayViewController = function(view, model) {
 	//makes it posible to drop events
 	view.activitiesContainer.on("drop", function (ev){
 		ev.preventDefault();
+    	ev.stopPropagation();
 		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
 	});
 
-	view.activitiesContainer.on("dragover", function (ev){
+	view.activitiesContainer.on("dragenter", function (ev){
 		ev.preventDefault();
+    	ev.stopPropagation();
 		view.activitiesContainer.css({"border": "2px solid rgba(101,153,255,0.6)"});
 		model.currentDragOver["day"] = view.day;
 		var position;
@@ -48,6 +50,7 @@ var DayViewController = function(view, model) {
 
 	view.activitiesContainer.on("dragleave", function (ev){
 		ev.preventDefault();
+    	ev.stopPropagation();
 		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
 		model.currentDragOver["id"] = -1;
 	});

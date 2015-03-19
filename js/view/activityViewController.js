@@ -9,6 +9,7 @@ var ActivityViewController = function(view, model) {
 
 	view.activitiesContainer.on("dragover", function (ev){
 		ev.preventDefault();
+    	ev.stopPropagation();
 		view.activitiesContainer.css({"border": "2px solid rgba(101,153,255,0.6)"});
 		model.currentDragOver["day"] = -1;
 		var position;
@@ -22,6 +23,7 @@ var ActivityViewController = function(view, model) {
 
 	view.activitiesContainer.on("dragleave", function (ev){
 		ev.preventDefault();
+    	ev.stopPropagation();
 		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
 		model.currentDragOver["id"] = -1;
 	});
@@ -29,6 +31,7 @@ var ActivityViewController = function(view, model) {
 	//makes it posible to drop events
 	view.activitiesContainer.on("drop", function (ev){
 		ev.preventDefault();
+    	ev.stopPropagation();
 		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
 	});
 

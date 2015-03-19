@@ -7,34 +7,38 @@ var DragDropViewController = function(view, model) {
 	//makes it posible to drg events in container
 	view.holder.on("drag", function (ev) {
 		ev.preventDefault();
-		var id = ev.target.id;
+    	ev.stopPropagation();
+		view.position = ev.target.id;
 		var list;
 		if(view.day == -1)
 			list = model.parkedActivities;
 		else
  		 	list = model.getActivities(view.day);
-		var activity = list[id];
+		var activity = list[view.position];
 
 		model.dragActivity["listId"] = view.day;
-		model.dragActivity["position"] = id;
+		model.dragActivity["position"] = view.position;
 		model.dragActivity["activity"] = activity;
 
-		if(view.day == -1) {
-			model.removeParkedActivity(id);
-		}
-		else 
-			model.days[view.day]._removeActivity(id);
-		model.notifyObservers();
 	});
 
-	view.holder.on("drop", function (ev) {
+	view.holder.on("dragend", function (ev) {
 		ev.preventDefault();
+    	ev.stopPropagation();
+		console.log("added");
+		if(view.day == -1) {
+			model.removeParkedActivity(view.position);
+		}
+		else 
+			model.days[view.day]._removeActivity(view.position);
 		var day;
 		if(model.currentDragOver["day"] == -1)
 			day = null;
 		else
 			day = model.currentDragOver["day"];
-		model.addActivity(model.dragActivity["activity"], day, model.currenDragOver["id"]);
+		model.addActivity(model.dragActivity["activity"], day, model.currentDragOver["id"]);
+		console.log("added");
 
+		model.notifyObservers();
 	});
 }
