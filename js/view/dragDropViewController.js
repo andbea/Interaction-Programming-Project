@@ -4,9 +4,8 @@ var DragDropViewController = function(view, model) {
 	The action would have to be initiated from either the activity holder window or the individual day
 	windows.*/
 
-
 	//makes it posible to drg events in container
-	view.container.on("drag", function (ev){
+	view.holder.on("drag", function (ev) {
 		ev.preventDefault();
 		var id = ev.target.id;
 		var list;
@@ -25,7 +24,7 @@ var DragDropViewController = function(view, model) {
 			model.removeParkedActivity(id);
 		}
 		else 
-			model.days[view.day].removeActivity(id);
+			model.days[view.day]._removeActivity(id);
 		model.notifyObservers();
 	});
 

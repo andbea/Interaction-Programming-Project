@@ -21,9 +21,6 @@ var ModalViewController = function(view, model) {
 
  		var activity = new Activity(name, length, typeId, description);
  		var id = model.addActivity(activity, null, null);
-
- 		var dragDropView = new DragDropView($("#activityView").find("#" + id), model, "-1");
-		var dragDropViewController = new DragDropViewController(dragDropView, model);
  	});
 
  	/* ----Unfinished---
