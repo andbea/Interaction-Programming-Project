@@ -29,7 +29,12 @@ var DragDropViewController = function(view, model) {
 
 	view.holder.on("drop", function (ev) {
 		ev.preventDefault();
-		model.addActivity(model.dragActivity["activity"], model.currentDragOver["day"], model.currenDragOver["id"]);
+		var day;
+		if(model.currentDragOver["day"] == -1)
+			day = null;
+		else
+			day = model.currentDragOver["day"];
+		model.addActivity(model.dragActivity["activity"], day, model.currenDragOver["id"]);
 
 	});
 }
