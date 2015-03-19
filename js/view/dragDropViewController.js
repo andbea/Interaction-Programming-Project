@@ -35,7 +35,11 @@ var DragDropViewController = function(view, model) {
 			day = null;
 		else
 			day = model.currentDragOver["day"];
-		model.addActivity(model.dragActivity["activity"], day, model.currentDragOver["id"]);
+
+		var newPosition = model.currentDragOver["id"];
+		if(view.position < newPosition)
+			newPosition--;
+		model.addActivity(model.dragActivity["activity"], day, newPosition);
 
 		model.notifyObservers();
 	});
