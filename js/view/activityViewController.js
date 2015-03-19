@@ -16,5 +16,11 @@ var ActivityViewController = function(view, model) {
 		ev.preventDefault();
 		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
 	});
+	
+	//makes it posible to drop events
+	view.activitiesContainer.on("drop", function (ev){
+		ev.preventDefault();
+		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
+	});
 
 }

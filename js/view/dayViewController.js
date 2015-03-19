@@ -31,6 +31,7 @@ var DayViewController = function(view, model) {
 	//makes it posible to drop events
 	view.activitiesContainer.on("drop", function (ev){
 		ev.preventDefault();
+		view.activitiesContainer.css({"border": "1px solid rgba(211,211,211,1)"});
 	});
 
 	view.activitiesContainer.on("dragover", function (ev){
